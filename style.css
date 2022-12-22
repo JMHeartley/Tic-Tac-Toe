@@ -1,0 +1,156 @@
+body {
+    background: #40E0D0;
+    color: white;
+    font-family: 'Concert One', cursive;
+}
+
+#board {
+    background: white;
+    height: 300px;
+    width: 300px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 8px 12px 25px 6px rgba(0, 0, 0, 0.55);
+    display: none;
+}
+
+#menu {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    height: 300px;
+    width: 350px;
+    text-align: center;
+    font-size: 20pt;
+    display: none;
+}
+
+#menu p {
+    border: 5px solid transparent;
+    line-height: 1.5;
+}
+
+#menu p:not(:first-child):hover {
+    border: 5px solid;
+}
+
+#thinking {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    text-align: center;
+    border: 0px solid;
+    transform: translate(-50%, -50%);
+    display: none;
+    height: 300px;
+    width: 300px;
+}
+
+#word {
+    position: absolute;
+    top: 37%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-bottom: 100px
+}
+
+#spinner {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    height: 50px;
+    width: 50px;
+
+    border-radius: 50%;
+    border: 10px solid white;
+    border-bottom: 10px solid transparent;
+    animation: spin 1.2s linear infinite;
+    transform-origin: top left;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg) translate(-50%, -50%);
+    }
+
+    100% {
+        transform: rotate(360deg) translate(-50%, -50%);
+    }
+}
+
+#message {
+    position: relative;
+    top: -33%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 32pt;
+}
+
+#after {
+    position: relative;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 28pt;
+    display: none;
+}
+
+#splash {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+    font-size: 48pt;
+    display: none;
+}
+
+.space {
+    background: #40E0D0;
+    height: 90px;
+    width: 90px;
+    position: absolute;
+
+    font-family: 'Boogaloo', cursive;
+    font-size: 55pt;
+    text-align: center;
+}
+
+#menu p:not(:first-child):hover,
+.space:hover,
+#after:hover {
+    cursor: pointer;
+}
+
+.c1 {
+    left: 5px;
+}
+
+.c2 {
+    left: 105px;
+}
+
+.c3 {
+    left: 205px;
+}
+
+.r1 {
+    top: 5px;
+}
+
+.r2 {
+    top: 105px;
+}
+
+.r3 {
+    top: 205px;
+}
