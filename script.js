@@ -1,15 +1,15 @@
 $(function () {
-    ShowSplashScreen();
-    SetUpEventListeners();
+    showSplashScreen();
+    setUpEventListeners();
 });
 
 var message = document.getElementById("message");
 var startMessage = "X Always Goes First!";
-var turnX = true;
-var over = false;
+var isXTurn = true;
+var isGameOver = false;
 var movesLeft = 9;
 var gameType = "";
-var marks = ["", "", "", "", "", "", "", "", ""];
+var spaces = ["", "", "", "", "", "", "", "", ""];
 var winSets = [
     [0, 1, 2],
     [3, 4, 5],
@@ -21,7 +21,7 @@ var winSets = [
     [6, 4, 2]
 ];
 
-function ShowSplashScreen() {
+function showSplashScreen() {
     $("#splash").fadeIn(1200);
     setTimeout(function () {
         $("#splash").fadeOut(300);
@@ -29,47 +29,47 @@ function ShowSplashScreen() {
     }, 2500);
 }
 
-function SetUpEventListeners() {
+function setUpEventListeners() {
     $("#menu p:not(:first-child)").click(function () {
-        GameSelect(this);
+        gameSelect(this);
     });
     $(".space.c1.r1").click(function () {
-        Move(0, this);
+        move(0, this);
     });
     $(".space.c2.r1").click(function () {
-        Move(1, this);
+        move(1, this);
     });
     $(".space.c3.r1").click(function () {
-        Move(2, this);
+        move(2, this);
     });
     $(".space.c1.r2").click(function () {
-        Move(3, this);
+        move(3, this);
     });
     $(".space.c2.r2").click(function () {
-        Move(4, this);
+        move(4, this);
     });
     $(".space.c3.r2").click(function () {
-        Move(5, this);
+        move(5, this);
     });
     $(".space.c1.r3").click(function () {
-        Move(6, this);
+        move(6, this);
     });
     $(".space.c2.r3").click(function () {
-        Move(7, this);
+        move(7, this);
     });
     $(".space.c3.r3").click(function () {
-        Move(8, this);
+        move(8, this);
     });
     $(".space").click(function () {
-        if (gameType == "PvC" && !over && turnX === false && movesLeft > 1)
-            ComputerMove();
+        if (gameType == "PvC" && !isGameOver && !isXTurn && movesLeft > 1)
+            computerMove();
     });
     $("#after").click(function () {
-        RestartGame();
+        restartGame();
     });
 }
 
-function GameSelect(x) {
+function gameSelect(x) {
     switch (x.textContent) {
         case "Player vs Player":
             gameType = "PvP";
@@ -87,94 +87,90 @@ function GameSelect(x) {
     message.innerHTML = startMessage;
 }
 
-function WinCheck() {
-    for (var i = 0; i < 8; i++) {
-        if (marks[winSets[i][0]]) {
+function checkForWin() {
+    for (var i = 0; i < winSets.length; i++) {
+        if (spaces[winSets[i][0]]) {
             if (
-                marks[winSets[i][0]] == marks[winSets[i][1]] &&
-                marks[winSets[i][1]] == marks[winSets[i][2]]
+                spaces[winSets[i][0]] == spaces[winSets[i][1]] &&
+                spaces[winSets[i][1]] == spaces[winSets[i][2]]
             ) {
-                message.innerHTML = (turnX === true ? "X" : "O") + " Wins!";
-                over = true;
+                message.innerHTML = (isXTurn ? "X" : "O") + " Wins!";
+                isGameOver = true;
                 $("#after").show();
             }
         }
         if (
-            !over &&
-            marks[0] &&
-            marks[1] &&
-            marks[2] &&
-            marks[3] &&
-            marks[4] &&
-            marks[5] &&
-            marks[6] &&
-            marks[7] &&
-            marks[8]
+            !isGameOver &&
+            spaces[0] &&
+            spaces[1] &&
+            spaces[2] &&
+            spaces[3] &&
+            spaces[4] &&
+            spaces[5] &&
+            spaces[6] &&
+            spaces[7] &&
+            spaces[8]
         ) {
-            over = true;
+            isGameOver = true;
             message.innerHTML = "It's a Tie!";
             $("#after").show();
         }
     }
 }
 
-function Move(x, z) {
-    if (!z.textContent && !over) {
-        //assign mark to array
-        marks[x] = turnX === true ? "X" : "O";
+function move(spaceIndex, htmlElement) {
+    if (!htmlElement.textContent && !isGameOver) {
+        spaces[spaceIndex] = isXTurn ? "X" : "O";
 
-        if (turnX) {
-            $(z).css("color", "#2E8B57");
-            $(z).css("background", "#15EE16");
+        if (isXTurn) {
+            $(htmlElement).css("color", "#2E8B57");
+            $(htmlElement).css("background", "#15EE16");
         } else {
-            $(z).css("color", "#C92C2C");
-            $(z).css("background", "#F6546A");
+            $(htmlElement).css("color", "#C92C2C");
+            $(htmlElement).css("background", "#F6546A");
         }
 
         //assign mark to space
-        z.textContent = turnX === true ? "X" : "O";
+        htmlElement.textContent = isXTurn ? "X" : "O";
 
-        WinCheck();
+        checkForWin();
 
         //if the game continues
-        if (!over) {
+        if (!isGameOver) {
             //change letter
-            turnX = !turnX;
+            isXTurn = !isXTurn;
             //change message
-            message.innerHTML = (turnX === true ? "X" : "O") + "'s Turn!";
+            message.innerHTML = (isXTurn ? "X" : "O") + "'s Turn!";
         }
 
         movesLeft--;
     }
 }
 
-function ComputerMove() {
-    var x;
-    var z = document.getElementsByClassName("space");
+function computerMove() {
+    var indexForBestMove;
+    var gameSpaces = document.getElementsByClassName("space");
 
     //check for best move
-    x = BestMove(x, z, (turnX == "X" ? "X" : "O"));
-    console.log("win move", x, movesLeft);
+    indexForBestMove = findIndexForBestMove((isXTurn == "X" ? "X" : "O"));
+    console.log("win move", indexForBestMove, movesLeft);
 
     //if no best moves check for block move
-    if (x === undefined) {
-        x = BestMove(x, z, (turnX !== "X" ? "X" : "O"));
-        console.log("block move", x, movesLeft);
+    if (indexForBestMove === undefined) {
+        indexForBestMove = findIndexForBestMove((isXTurn !== "X" ? "X" : "O"));
+        console.log("block move", indexForBestMove, movesLeft);
     }
 
     //if no win move or block pick random move
-    if (x === undefined) {
+    if (indexForBestMove === undefined) {
         //pick random move that's not already taken
-        x = Math.floor(Math.random() * 8);
-
-        while (marks[x] !== "") {
-            x = Math.floor(Math.random() * 8);
-        }
-        console.log("random move", x, movesLeft);
-    }//end if here
-
-    //reassign z to correct object move
-    z = z[x];
+        let randomSpace;
+        do {
+            randomSpace = Math.floor(Math.random() * (spaces.length - 1));
+        } while (spaces[randomSpace] !== "")
+        indexForBestMove = randomSpace;
+        console.log("random move", indexForBestMove, movesLeft);
+    }
 
     //display animation
     $("#thinking").show();
@@ -182,24 +178,23 @@ function ComputerMove() {
     //after some time pick a move
     setTimeout(function () {
         $("#thinking").hide();
-        Move(x, z);
+        move(indexForBestMove, gameSpaces[indexForBestMove]);
     }, Math.floor(Math.random() * 1000) + 200);
 }
 
-function RestartGame() {
-    if (over) {
+function restartGame() {
+    if (isGameOver) {
         //reset variables
-        turnX = true;
-        over = false;
-        marks = ["", "", "", "", "", "", "", "", ""];
-        movesLeft = 9;
+        isXTurn = true;
+        isGameOver = false;
+        spaces = ["", "", "", "", "", "", "", "", ""];
+        movesLeft = spaces.length;
 
         //reset board
-        var spaces = document.getElementsByClassName("space");
-
-        for (var i = 0; i <= 8; i++) {
-            spaces[i].textContent = "";
-            spaces[i].style.backgroundColor = "#40E0D0";
+        var gameSpaces = document.getElementsByClassName("space");
+        for (var i = 0; i < gameSpaces.length; i++) {
+            gameSpaces[i].textContent = "";
+            gameSpaces[i].style.backgroundColor = "#40E0D0";
         }
 
         message.innerHTML = startMessage;
@@ -210,32 +205,31 @@ function RestartGame() {
     }
 }
 
-function BestMove(x, z, y) {
-    for (var i = 0; i < 8; i++) {
-        if (marks[winSets[i][0]]) {
+function findIndexForBestMove(playerMark) {
+    for (var i = 0; i < winSets; i++) {
+        if (spaces[winSets[i][0]]) {
             if (
-                marks[winSets[i][0]] == marks[winSets[i][1]] &&
-                marks[winSets[i][1]] !== "" &&
-                marks[winSets[i][2]] === "" &&
-                marks[winSets[i][1]] == y
+                spaces[winSets[i][0]] == spaces[winSets[i][1]] &&
+                spaces[winSets[i][1]] !== "" &&
+                spaces[winSets[i][2]] === "" &&
+                spaces[winSets[i][1]] == playerMark
             ) {
-                x = winSets[i][2];
+                return winSets[i][2];
             } else if (
-                marks[winSets[i][1]] == marks[winSets[i][2]] &&
-                marks[winSets[i][2]] !== "" &&
-                marks[winSets[i][0]] === "" &&
-                marks[winSets[i][1]] == y
+                spaces[winSets[i][1]] == spaces[winSets[i][2]] &&
+                spaces[winSets[i][2]] !== "" &&
+                spaces[winSets[i][0]] === "" &&
+                spaces[winSets[i][1]] == playerMark
             ) {
-                x = winSets[i][0];
+                return winSets[i][0];
             } else if (
-                marks[winSets[i][0]] == marks[winSets[i][2]] &&
-                marks[winSets[i][2]] !== "" &&
-                marks[winSets[i][1]] === "" &&
-                marks[winSets[i][2]] == y
+                spaces[winSets[i][0]] == spaces[winSets[i][2]] &&
+                spaces[winSets[i][2]] !== "" &&
+                spaces[winSets[i][1]] === "" &&
+                spaces[winSets[i][2]] == playerMark
             ) {
-                x = winSets[i][1];
+                return winSets[i][1];
             }
         }
-    } console.log(y);
-    return x;
+    }
 }
