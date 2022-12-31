@@ -95,7 +95,6 @@ function gameSelect(htmlElement) {
     gameType = htmlElement.textContent;
     $("#board").fadeIn(1000);
     $("#menu").hide(300);
-    message.innerHTML = startMessage;
 }
 
 function checkForGameOver() {
