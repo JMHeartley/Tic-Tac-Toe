@@ -107,7 +107,7 @@ function checkForGameOver() {
             isGameOver = true;
             $("#reset").show();
         }
-        const movesLeft = spaces(space => space === "").length;
+        const movesLeft = spaces.filter(space => space === "").length;
         if (!isGameOver && movesLeft == 0) {
             message.innerHTML = "It's a Tie!";
             isGameOver = true;
