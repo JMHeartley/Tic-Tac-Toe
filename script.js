@@ -4,14 +4,14 @@ $(function () {
     setUpEventListeners();
 });
 
-var message = document.getElementById("message");
-var startMessage = "X Always Goes First!";
-var defaultBackgroundColor = "#40E0D0";
-var xBackgroundColor = "#15EE16";
-var xFontColor = "#2E8B57";
-var oBackgroundColor = "#F6546A";
-var oFontColor = "#C92C2C";
-var winSets = [
+const message = document.getElementById("message");
+const startMessage = "X Always Goes First!";
+const defaultBackgroundColor = "#40E0D0";
+const xBackgroundColor = "#15EE16";
+const xFontColor = "#2E8B57";
+const oBackgroundColor = "#F6546A";
+const oFontColor = "#C92C2C";
+const winSets = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -22,10 +22,10 @@ var winSets = [
     [6, 4, 2]
 ];
 
-var gameType;
-var isXTurn;
-var isGameOver;
-var spaces;
+let gameType;
+let isXTurn;
+let isGameOver;
+let spaces;
 
 function showSplashScreen() {
     $("#splash").fadeIn(1200);
@@ -37,8 +37,8 @@ function showSplashScreen() {
 
 function resetGame() {
     if (isGameOver) {
-        var gameSpaces = document.getElementsByClassName("space");
-        for (var i = 0; i < gameSpaces.length; i++) {
+        const gameSpaces = document.getElementsByClassName("space");
+        for (let i = 0; i < gameSpaces.length; i++) {
             gameSpaces[i].textContent = "";
             gameSpaces[i].style.backgroundColor = defaultBackgroundColor;
         }
@@ -147,8 +147,7 @@ function move(spaceIndex, htmlElement) {
 }
 
 function computerMove() {
-    var indexForBestMove;
-    var gameSpaces = document.getElementsByClassName("space");
+    let indexForBestMove;
 
     indexForBestMove = findIndexForBestMove((isXTurn == "X" ? "X" : "O"));
     console.log("win move", indexForBestMove, spaces);
@@ -168,6 +167,7 @@ function computerMove() {
     $("#thinking").show();
     setTimeout(function () {
         $("#thinking").hide();
+        const gameSpaces = document.getElementsByClassName("space");
         move(indexForBestMove, gameSpaces[indexForBestMove]);
     }, Math.floor(Math.random() * 1000) + 200);
 }
@@ -175,7 +175,7 @@ function computerMove() {
 function findIndexForBestMove(playerMark) {
     //set index of best move to variable and return that
     //forEach's function boundary inhibits proper return statements
-    var bestMove;
+    let bestMove;
     winSets.forEach((winSet) => {
         if (spaces[winSet[0]] == playerMark
             && spaces[winSet[0]] == spaces[winSet[1]]
