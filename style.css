@@ -93,7 +93,7 @@ body {
     font-size: 32pt;
 }
 
-#after {
+#reset {
     position: relative;
     top: 80%;
     left: 50%;
@@ -127,7 +127,7 @@ body {
 
 #menu p:not(:first-child):hover,
 .space:hover,
-#after:hover {
+#reset:hover {
     cursor: pointer;
 }
 
