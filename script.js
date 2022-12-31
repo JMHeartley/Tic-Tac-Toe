@@ -160,7 +160,7 @@ function computerMove() {
     if (indexForBestMove === undefined) {
         do {
             indexForBestMove = Math.floor(Math.random() * (spaces.length - 1));
-        } while (spaces[randomIndex] !== "")
+        } while (spaces[indexForBestMove] !== "")
         console.log("random move", indexForBestMove, spaces);
     }
 
