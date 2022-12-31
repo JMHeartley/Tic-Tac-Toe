@@ -159,12 +159,10 @@ function computerMove() {
     }
 
     if (indexForBestMove === undefined) {
-        let randomSpace;
         do {
-            randomSpace = Math.floor(Math.random() * (spaces.length - 1));
-        } while (spaces[randomSpace] !== "")
-        indexForBestMove = randomSpace;
-        console.log("random move", indexForBestMove, movesLeft);
+            indexForBestMove = Math.floor(Math.random() * (spaces.length - 1));
+        } while (spaces[randomIndex] !== "")
+        console.log("random move", indexForBestMove, spaces);
     }
 
     $("#thinking").show();
