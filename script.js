@@ -58,58 +58,43 @@ function resetGame() {
 }
 
 function setUpEventListeners() {
-    $("#menu p:not(:first-child)").click(function () {
+    $("#menu p").click(function () {
         gameSelect(this);
     });
     $(".space.c1.r1").click(function () {
-        move(0, this);
+        playerMove(0, this);
     });
     $(".space.c2.r1").click(function () {
-        move(1, this);
+        playerMove(1, this);
     });
     $(".space.c3.r1").click(function () {
-        move(2, this);
+        playerMove(2, this);
     });
     $(".space.c1.r2").click(function () {
-        move(3, this);
+        playerMove(3, this);
     });
     $(".space.c2.r2").click(function () {
-        move(4, this);
+        playerMove(4, this);
     });
     $(".space.c3.r2").click(function () {
-        move(5, this);
+        playerMove(5, this);
     });
     $(".space.c1.r3").click(function () {
-        move(6, this);
+        playerMove(6, this);
     });
     $(".space.c2.r3").click(function () {
-        move(7, this);
+        playerMove(7, this);
     });
     $(".space.c3.r3").click(function () {
-        move(8, this);
-    });
-    $(".space").click(function () {
-        if (gameType == "PvC" && !isGameOver && !isXTurn && movesLeft > 1)
-            computerMove();
+        playerMove(8, this);
     });
     $("#reset").click(function () {
         resetGame();
     });
 }
 
-function gameSelect(x) {
-    switch (x.textContent) {
-        case "Player vs Player":
-            gameType = "PvP";
-            break;
-        case "Player vs CPU":
-            gameType = "PvC";
-            break;
-        case "CPU vs CPU":
-            gameType = "CvC";
-            break;
-    }
-
+function gameSelect(htmlElement) {
+    gameType = htmlElement.textContent;
     $("#board").fadeIn(1000);
     $("#menu").hide(300);
     message.innerHTML = startMessage;
@@ -131,6 +116,11 @@ function checkForGameOver() {
         }
     });
 }
+
+function playerMove(spaceIndex, htmlElement) {
+    move(spaceIndex, htmlElement);
+    if (gameType == "Player vs CPU" && !isGameOver) {
+        computerMove();
     }
 }
 
@@ -185,8 +175,6 @@ function computerMove() {
         move(indexForBestMove, gameSpaces[indexForBestMove]);
     }, Math.floor(Math.random() * 1000) + 200);
 }
-
-
 
 function findIndexForBestMove(playerMark) {
     //set index of best move to variable and return that
