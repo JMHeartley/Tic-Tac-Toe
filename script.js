@@ -26,7 +26,6 @@ var gameType;
 var isXTurn;
 var isGameOver;
 var spaces;
-var movesLeft;
 
 function showSplashScreen() {
     $("#splash").fadeIn(1200);
@@ -54,7 +53,6 @@ function resetGame() {
     isXTurn = true;
     isGameOver = false;
     spaces = ["", "", "", "", "", "", "", "", ""];
-    movesLeft = spaces.length;
 }
 
 function setUpEventListeners() {
@@ -109,6 +107,7 @@ function checkForGameOver() {
             isGameOver = true;
             $("#reset").show();
         }
+        const movesLeft = spaces(space => space === "").length;
         if (!isGameOver && movesLeft == 0) {
             message.innerHTML = "It's a Tie!";
             isGameOver = true;
@@ -137,7 +136,6 @@ function move(spaceIndex, htmlElement) {
         }
 
         htmlElement.textContent = isXTurn ? "X" : "O";
-        movesLeft--;
 
         checkForGameOver();
 
@@ -153,11 +151,11 @@ function computerMove() {
     var gameSpaces = document.getElementsByClassName("space");
 
     indexForBestMove = findIndexForBestMove((isXTurn == "X" ? "X" : "O"));
-    console.log("win move", indexForBestMove, movesLeft);
+    console.log("win move", indexForBestMove, spaces);
 
     if (indexForBestMove === undefined) {
         indexForBestMove = findIndexForBestMove((isXTurn !== "X" ? "X" : "O"));
-        console.log("block move", indexForBestMove, movesLeft);
+        console.log("block move", indexForBestMove, spaces);
     }
 
     if (indexForBestMove === undefined) {
