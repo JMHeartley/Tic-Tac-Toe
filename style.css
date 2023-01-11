@@ -131,6 +131,10 @@ body {
     cursor: pointer;
 }
 
+#topScore {
+    float: right;
+}
+
 .c1 {
     left: 5px;
 }

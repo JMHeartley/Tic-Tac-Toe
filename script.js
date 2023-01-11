@@ -1,4 +1,5 @@
 $(function () {
+    getTopScore();
     resetGame();
     showSplashScreen();
     setUpEventListeners();
@@ -21,11 +22,16 @@ const winSets = [
     [0, 4, 8],
     [6, 4, 2]
 ];
+const publicKey = "5fa8af3feb371a09c4c51c2f";
+const privateKey = "gIJe5J6z20ik-5Mm_NDCyAzldYBBzTmUub-VeuQrX1jw";
+const useHttps = true;
 
 let gameType;
 let isXTurn;
 let isGameOver;
 let spaces;
+let sessionId;
+let currentStreak;
 
 function showSplashScreen() {
     $("#splash").fadeIn(1200);
@@ -159,7 +165,7 @@ function computerMove() {
     if (indexForBestMove === undefined) {
         do {
             indexForBestMove = Math.floor(Math.random() * (spaces.length - 1));
-        } while (spaces[indexForBestMove] !== "")
+        } while (spaces[indexForBestMove] !== "");
         console.log("random move", indexForBestMove, spaces);
     }
 
@@ -193,4 +199,30 @@ function findIndexForBestMove(playerMark) {
         }
     });
     return bestMove;
+
+function getTopScore() {
+    dreamlo.initialize(publicKey, privateKey, useHttps);
+
+    const skip = 0;
+    const take = 1;
+    dreamlo.getScores(dreamlo.ScoreFormat.Object, dreamlo.SortOrder.PointsDescending, skip, take)
+        .then((topScore) => {
+            let text = "";
+            if (topScore) {
+                if (topScore.score == 1) {
+                    text = topScore.score + " win";
+                } else {
+                    text = topScore.score + " wins";
+                }
+                text += " - " + topScore.text;
+            }
+            else {
+                text = "No scores yet!";
+            }
+            $("#topScore").text("T0P: " + text);
+        })
+        .catch((error) => {
+            alert(error);
+        });
 }
+
