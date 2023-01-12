@@ -14,18 +14,18 @@
 <body>
     <span id="currentStreak">CURRENT STREAK: 0</span>
     <span id="topScore">TOP: <i>checking</i></span>
-    <div id="splash">Let's Play Some <br> Tic-Tac-Toe!</div>
-    <div id="menu">
-        <h4>Choose a game type:</h4>
+    <div id="splash" class="center d-none">Let's Play Some <br> Tic-Tac-Toe!</div>
+    <div id="menu" class="center d-none">
+        <h2>Choose a game type:</h2>
         <p class="button" id="playerVsCPU">Player vs CPU</p>
         <p class="button" id="playerVsPlayer">Player vs Player</p>
         <p class="button" id="viewLeaderboard">View Leaderboard</p>
     </div>
-    <div id="board">
-        <p id="message"></p>
-        <div id="thinking">
-            <div id="word">Thinking...</div>
-            <div id="spinner"></div>
+    <div id="board" class="center d-none">
+        <h1 id="message"></h1>
+        <div id="thinking" class="center d-none text-center">
+            <span>Thinking...</span>
+            <div id="spinner" class="center"></div>
         </div>
         <div class="space c1 r1"></div>
         <div class="space c2 r1"></div>
@@ -41,13 +41,13 @@
             <p class="backToMenu button">Back to menu</p>
         </div>
     </div>
-    <div id="nameInput" class="center">
-        <h4 id="nameInputMessage"></h4>
+    <div id="nameInput" class="center d-none">
+        <h2 id="nameInputMessage"></h2>
         <input type="text" id="name" placeholder="Enter your name">
         <span id="submit" class="button">Yes</span>
         <p class="backToMenu button">No, thanks</p>
     </div>
-    <div id="leaderboard">
+    <div id="leaderboard" class="center d-none">
         <table>
             <thead>
                 <tr>
