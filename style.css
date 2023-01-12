@@ -125,6 +125,11 @@ tbody>tr:nth-child(odd) {
     float: right;
 }
 
+#scores {
+    width: 500px;
+    margin: 150px auto 0;
+}
+
 .c1 {
     left: 5px;
 }
