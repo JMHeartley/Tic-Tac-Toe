@@ -29,7 +29,7 @@ let gameType;
 let isXTurn;
 let isGameOver;
 let spaces;
-let currentStreak = 0;
+let streak = 0;
 
 function revealSplashScreen() {
     $("#splash").fadeIn(1200);
@@ -135,12 +135,12 @@ function checkForGameOver() {
             if (gameType == "Player vs CPU") {
                 if (isXTurn) {
                     message.innerHTML = "You won!";
-                    currentStreak++;
-                    updateCurrentStreak(currentStreak);
+                    streak++;
+                    updateCurrentStreak(streak);
                 }
                 else {
                     message.innerHTML = "You lost :(";
-                    if (currentStreak > 0) {
+                    if (streak > 0) {
                         goToNameInput();
                     } else {
                         updateCurrentStreak(0);
@@ -154,7 +154,7 @@ function checkForGameOver() {
             isGameOver = true;
             $("#boardMenu").show();
             if (gameType == "Player vs CPU") {
-                if (currentStreak > 0) {
+                if (streak > 0) {
                     goToNameInput();
                 } else {
                     updateCurrentStreak(0);
@@ -265,12 +265,7 @@ function updateTopScore() {
         .then((topScore) => {
             let text = "";
             if (topScore) {
-                if (topScore.score == 1) {
-                    text = topScore.score + " win";
-                } else {
-                    text = topScore.score + " wins";
-                }
-                text += " - " + topScore.text;
+                text = topScore.score + " by " + topScore.text;
             }
             else {
                 text = "No scores yet!";
@@ -284,10 +279,10 @@ function updateTopScore() {
 
 function goToNameInput() {
     let text = "You had a final streak of ";
-    if (currentStreak == 1) {
+    if (streak == 1) {
         text += "1 game";
     } else {
-        text += currentStreak + " games";
+        text += streak + " games";
     }
     text += "! \n Do you want to add your name to the leaderboard?";
     $("#nameInputMessage").text(text);
@@ -300,7 +295,7 @@ function addScoreToLeaderboard(name) {
     const timestamp = new Date().getTime();
     const score = {
         name: timestamp,
-        points: currentStreak,
+        points: streak,
         text: name
     };
 
@@ -345,7 +340,7 @@ function goToLeaderboard(scores, nameToHighlight) {
 }
 
 function updateCurrentStreak(number) {
-    console.log("updateCurrentStreak:" + number);
-    currentStreak = number;
-    $("#currentStreak").text("CURRENT STREAK: " + currentStreak);
+    console.log("updateStreak:" + number);
+    streak = number;
+    $("#streak").text("STREAK: " + streak);
 }

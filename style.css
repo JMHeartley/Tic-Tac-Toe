@@ -118,7 +118,7 @@ tbody>tr:nth-child(odd) {
     color: black;
 }
 
-#currentStreak {
+#streak {
     float: left;
 }
 
@@ -127,7 +127,7 @@ tbody>tr:nth-child(odd) {
 }
 
 #scores {
-    width: 500px;
+    width: 350px;
     margin: 150px auto 0;
 }
 
