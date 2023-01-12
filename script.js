@@ -110,6 +110,9 @@ function setUpEventListeners() {
 
         updateTopScore();
     });
+    $("#viewLeaderboard").click(async function () {
+        const scores = await getScores();
+        goToLeaderboard(scores);
     });
 }
 
@@ -304,6 +307,16 @@ function addScoreToLeaderboard(name) {
     return dreamlo.addScore(score, dreamlo.ScoreFormat.Object, dreamlo.SortOrder.PointsDescending, true).then((scores) => {
         return scores;
     })
+        .catch((error) => {
+            alert(error);
+        });
+}
+
+function getScores() {
+    return dreamlo.getScores()
+        .then((scores) => {
+            return scores;
+        })
         .catch((error) => {
             alert(error);
         });
