@@ -30,12 +30,12 @@ body {
     display: none;
 }
 
-#menu p {
+.button {
     border: 5px solid transparent;
     line-height: 1.5;
 }
 
-#menu p:not(:first-child):hover {
+.button:hover {
     border: 5px solid;
 }
 
@@ -93,6 +93,15 @@ body {
     font-size: 32pt;
 }
 
+#boardMenu {
+    position: relative;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 28pt;
+}
+
 #reset {
     position: relative;
     top: 80%;
@@ -110,8 +119,34 @@ body {
     transform: translate(-50%, -50%);
 
     text-align: center;
-    font-size: 48pt;
+    font-size: 42pt;
     display: none;
+}
+
+#leaderboard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+    font-size: 20pt;
+    display: none;
+}
+
+table {
+    font-size: 28pt;
+    overflow-y: auto;
+    max-height: 50vh;
+    max-width: 50vw;
+}
+
+td {
+    padding: 0.5rem 1rem;
+}
+
+tbody>tr:nth-child(odd) {
+    background-color: #8fddd4;
 }
 
 .space {
@@ -125,10 +160,23 @@ body {
     text-align: center;
 }
 
-#menu p:not(:first-child):hover,
 .space:hover,
-#reset:hover {
+.button:hover {
     cursor: pointer;
+}
+
+#nameInput {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 20pt;
+    display: none;
+}
+
+.highlight {
+    color: black;
 }
 
 #topScore {

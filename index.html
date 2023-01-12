@@ -12,7 +12,14 @@
 </head>
 
 <body>
+    <span id="currentStreak">CURRENT STREAK: 0</span>
     <span id="topScore">TOP: <i>checking</i></span>
+    <div id="splash">Let's Play Some <br> Tic-Tac-Toe!</div>
+    <div id="menu">
+        <h4>Choose a game type:</h4>
+        <p class="button" id="playerVsCPU">Player vs CPU</p>
+        <p class="button" id="playerVsPlayer">Player vs Player</p>
+    </div>
     <div id="board">
         <p id="message"></p>
         <div id="thinking">
@@ -28,17 +35,30 @@
         <div class="space c1 r3"></div>
         <div class="space c2 r3"></div>
         <div class="space c3 r3"></div>
-        <p id="reset">Click here to restart</p>
+        <div id="boardMenu">
+            <p id="playAgain" class="button">Play again?</p>
+            <p class="backToMenu button">Back to menu</p>
+        </div>
     </div>
-    <div id="menu">
-        <h4>Choose a game type:</h4>
-        <p>Player vs Player</p>
-        <p>Player vs CPU</p>
-        <!--
-            <p>CPU vs CPU</p>
-        -->
+    <div id="nameInput" class="center">
+        <h4 id="nameInputMessage"></h4>
+        <input type="text" id="name" placeholder="Enter your name">
+        <span id="submit" class="button">Yes</span>
+        <p class="backToMenu button">No, thanks</p>
     </div>
-    <div id="splash">Let's Play Some <br> Tic-Tac-Toe!</div>
+    <div id="leaderboard">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Wins</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div class="backToMenu button">Back to menu</div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dreamlo.js@1.0.1/dist/dreamlo.min.js"></script>
     <script src="script.js"></script>
