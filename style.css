@@ -128,7 +128,19 @@ tbody>tr:nth-child(odd) {
 
 #scores {
     width: 350px;
-    margin: 150px auto 0;
+    margin: 300px auto 0;
+}
+
+#name {
+    font-size: 18pt;
+    width: 150px;
+    background-color: #40E0D0;
+    color: white;
+    border: 5px solid white;
+}
+
+#name:focus {
+    outline: none;
 }
 
 .c1 {
