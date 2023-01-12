@@ -97,6 +97,7 @@ tbody>tr:nth-child(odd) {
     font-size: 55pt;
 }
 
+#githubLogo:hover,
 .space:hover,
 .button:hover {
     cursor: pointer;
