@@ -65,7 +65,7 @@ body {
 
 #boardMenu {
     position: relative;
-    top: 250px;
+    top: 300px;
 }
 
 #splash {
@@ -129,6 +129,10 @@ tbody>tr:nth-child(odd) {
 #scores {
     width: 350px;
     margin: 300px auto 0;
+}
+
+#scores {
+    margin-top: 0px;
 }
 
 #name {
