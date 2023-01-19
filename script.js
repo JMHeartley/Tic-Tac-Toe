@@ -127,7 +127,6 @@ function checkForGameOver() {
             && spaces[winSet[0]] == spaces[winSet[1]]
             && spaces[winSet[1]] == spaces[winSet[2]]) {
 
-            $("#message").text((isXTurn ? "X" : "O") + " Wins!");
             isGameOver = true;
             $("#boardMenu").show();
 
@@ -145,6 +144,9 @@ function checkForGameOver() {
                         updateCurrentStreak(0);
                     }
                 }
+            }
+            else {
+                $("#message").text((isXTurn ? "X" : "O") + " Wins!");
             }
         }
         const movesLeft = spaces.filter(space => space === "").length;
