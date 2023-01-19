@@ -47,7 +47,7 @@ function resetBoard() {
         }
     }
     $("#boardMenu").hide();
-    $("#message").innerHTML = START_MESSAGE;
+    $("#message").text(START_MESSAGE);
     gameType = "";
     isXTurn = true;
     isGameOver = false;
@@ -127,18 +127,18 @@ function checkForGameOver() {
             && spaces[winSet[0]] == spaces[winSet[1]]
             && spaces[winSet[1]] == spaces[winSet[2]]) {
 
-            $("#message").innerHTML = (isXTurn ? "X" : "O") + " Wins!";
+            $("#message").text((isXTurn ? "X" : "O") + " Wins!");
             isGameOver = true;
             $("#boardMenu").show();
 
             if (gameType == "Player vs CPU") {
                 if (isXTurn) {
-                    $("#message").innerHTML = "You won!";
+                    $("#message").text("You won!");
                     streak++;
                     updateCurrentStreak(streak);
                 }
                 else {
-                    $("#message").innerHTML = "You lost :(";
+                    $("#message").text("You lost :(");
                     if (streak > 0) {
                         goToNameInput();
                     } else {
@@ -149,7 +149,7 @@ function checkForGameOver() {
         }
         const movesLeft = spaces.filter(space => space === "").length;
         if (!isGameOver && movesLeft == 0) {
-            $("#message").innerHTML = "It's a Tie!";
+            $("#message").text("It's a Tie!");
             isGameOver = true;
             $("#boardMenu").show();
             if (gameType == "Player vs CPU") {
@@ -191,7 +191,7 @@ function move(spaceIndex, htmlElement) {
 
         if (!isGameOver) {
             isXTurn = !isXTurn;
-            $("#message").innerHTML = (isXTurn ? "X" : "O") + "'s Turn!";
+            $("#message").text((isXTurn ? "X" : "O") + "'s Turn!");
         }
     }
 }
