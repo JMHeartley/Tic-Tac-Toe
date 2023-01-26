@@ -263,7 +263,8 @@ function updateTopScore() {
     const skip = 0;
     const take = 1;
     dreamlo.getScores(dreamlo.ScoreFormat.Object, dreamlo.SortOrder.PointsDescending, skip, take)
-        .then((topScore) => {
+        .then((scores) => {
+            const topScore = scores[0];
             let text = "";
             if (topScore) {
                 text = topScore.score + " by " + topScore.text;
