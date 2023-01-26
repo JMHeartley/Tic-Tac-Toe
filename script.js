@@ -267,7 +267,7 @@ function updateTopScore() {
             const topScore = scores[0];
             let text = "";
             if (topScore) {
-                text = topScore.score + " by " + topScore.text;
+                text = topScore.score;
             }
             else {
                 text = "No scores yet!";
