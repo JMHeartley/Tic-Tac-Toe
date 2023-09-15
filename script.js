@@ -12,7 +12,7 @@ const DEFAULT_BACKGROUND_COLOR = "#40E0D0";
 const X_BACKGROUND_COLOR = "#15EE16";
 const X_FONT_COLOR = "#2E8B57";
 const O_BACKGROUND_COLOR = "#F6546A";
-const o_FONT_COLOR = "#C92C2C";
+const O_FONT_COLOR = "#C92C2C";
 const WIN_SETS = [
     [0, 1, 2],
     [3, 4, 5],
@@ -183,7 +183,7 @@ function move(spaceIndex, htmlElement) {
             $(htmlElement).css("color", X_FONT_COLOR);
             $(htmlElement).css("background", X_BACKGROUND_COLOR);
         } else {
-            $(htmlElement).css("color", o_FONT_COLOR);
+            $(htmlElement).css("color", O_FONT_COLOR);
             $(htmlElement).css("background", O_BACKGROUND_COLOR);
         }
 
